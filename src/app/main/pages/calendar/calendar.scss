@@ -1,0 +1,344 @@
+@media screen and (min-device-width: 300px) and (max-device-width: 480px) {#calendar .header {
+    background-size: cover !important;}
+.toolbar.layout-align-start-center.layout-row {
+    bottom: 2px !important;
+    display: block;
+    padding: 0;
+    position: relative !important;
+}
+.head-center img {
+    padding-left: 0 !important;
+}
+    } 
+@media screen and (min-device-width: 481px) and (max-device-width: 620px) {#calendar .header {
+    background-size: cover !important;}} 
+@media screen and (min-device-width: 620px) and (max-device-width: 768px) { 
+ #calendar {
+    padding-top: 0px !important;
+}   
+#calendar .header {
+    background-size: cover !important;
+    background-position: top left !important;
+    background-repeat: no-repeat;
+    background-color: #FAFAFA;
+    min-height: auto !important;
+    color: #FFFFFF;
+    padding-bottom: 16px;
+    -webkit-transition: background 0.5s linear;
+    transition: background 0.5s linear;
+    height: auto !important;
+    padding: 0px 10px !important;
+}
+#calendar .header .header-content .header-bottom {
+    bottom: 10px;
+}
+}
+@media screen and (min-device-width:769px) and (max-device-width: 1200px) {
+    
+#calendar .header {
+    background-size: cover !important;}
+
+}
+.head-center img{
+    padding-left:60px;
+}
+
+.logo.layout-align-start-center.layout-row {
+    width: 100%;
+}
+
+.toolbar.layout-align-start-center.layout-row {
+    position: relative !important;
+    bottom: 22px;
+}
+
+.head-center {
+    width: 50%;
+    position: relative;
+    bottom: 22px;
+}
+
+span.logo-icon {
+    width: 42%;
+    position: relative;
+    top: 22px;
+}
+
+
+#calendar {
+    background: #FFFFFF;
+    .header {
+        position: relative;
+        background-size: 100% auto;
+        background-position: 0 50%;
+        background-repeat: no-repeat;
+        background-color: #FAFAFA;
+        color: #FFFFFF;
+        padding-bottom: 16px;
+        transition: background 0.5s linear;
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1;
+           /* background: rgba(0, 0, 0, 0.45); */
+        }
+
+        &.Jan {
+            background-image: url('/assets/images/backgrounds/header_cal2.jpg');
+            background-position: 0 45%;
+        }
+        &.Feb {
+            background-image: url('/assets/images/backgrounds/header_cal1.jpg');
+            background-position: 0 50%;
+        }
+        &.Mar {
+            background-image: url('/assets/images/backgrounds/header_cal2.jpg');
+            background-position: 0 45%;
+        }
+        &.Apr {
+            background-image: url('/assets/images/backgrounds/header_cal1.jpg');
+            background-position: 0 48%;
+        }
+        &.May {
+            background-image: url('/assets/images/backgrounds/header_cal2.jpg');
+            background-position: 0 47%;
+        }
+        &.Jun {
+            background-image: url('/assets/images/backgrounds/header_cal1.jpg');
+            background-position: 0 48%;
+        }
+        &.Jul {
+            background-image: url('/assets/images/backgrounds/header_cal2.jpg');
+            background-position: 0 3%;
+        }
+        &.Aug {
+            background-image: url('/assets/images/backgrounds/header_cal1.jpg');
+            background-position: 0 61%;
+        }
+        &.Sep {
+            background-image: url('/assets/images/backgrounds/header_cal2.jpg');
+            background-position: 0 58%;
+        }
+        &.Oct {
+            background-image: url('/assets/images/backgrounds/header_cal1.jpg');
+            background-position: 0 50%;
+        }
+        &.Nov {
+            background-image: url('/assets/images/backgrounds/header_cal2.jpg');
+            background-position: 0 46%;
+        }
+        &.Dec {
+            background-image: url('/assets/images/backgrounds/header_cal1.jpg');
+            background-position: 0 43%;
+        }
+
+        .header-content {
+            height: 100%;
+
+            .header-top {
+                position: relative;
+                z-index: 2;
+
+                .logo {
+
+                    .logo-icon {
+                        margin-right: 16px;
+                    }
+
+                    .logo-text {
+                        font-size: 24px;
+                    }
+                }
+            }
+
+            .header-bottom {
+                position: relative;
+                z-index: 2;
+
+                .title {
+                    font-size: 20px;
+                    min-width: 160px;
+                    text-align: center;
+                }
+            }
+        }
+
+        .add-event-button {
+            position: absolute;
+            right: 18px;
+            bottom: -32px;
+        }
+
+        md-icon {
+            color: #FFFFFF;
+        }
+    }
+
+    .content {
+        padding: 0;
+
+        #calendarView {
+
+            &.fc {
+
+                .fc-widget-header {
+                    border: none;
+                    color: rgba(0, 0, 0, 0.54);
+
+                    .fc-day-header {
+                        text-align: left;
+                        border: none;
+                        font-weight: 500;
+                        padding: 8px;
+                    }
+                }
+
+                .fc-widget-content {
+                    color: rgba(0, 0, 0, 0.54);
+
+                    .fc-day-grid-container {
+
+                        .fc-day-grid {
+
+                            .fc-day-number {
+                                text-align: left;
+                                padding: 8px 8px 0 8px;
+                            }
+                        }
+                    }
+
+                    .fc-time-grid-container {
+                        overflow: hidden;
+                        height: auto !important;
+
+                        .fc-axis {
+                            font-weight: 500;
+                            border: none;
+                        }
+                    }
+                }
+
+                .fc-day-grid-event {
+                    margin: 4px 8px 0 8px;
+                    padding: 2px 4px;
+                    font-size: 13px;
+                    color: #FFFFFF;
+                }
+
+                .fc-time-grid-event {
+                    color: #FFFFFF;
+                }
+
+                .fc-month-view {
+                    padding: 24px;
+                }
+
+                .fc-agenda-view {
+
+                    .fc-widget-header {
+
+                        .fc-day-header {
+                            border: 1px solid #DDD;
+                            line-height: 50px;
+                            font-size: 17px;
+                        }
+                    }
+
+                    > table > tbody > tr > td.fc-widget-content {
+                        border: none;
+                    }
+
+                    .fc-minor .fc-widget-content {
+                        border-top: none;
+                    }
+
+                    .fc-week, .fc-day {
+                        height: 100px !important;
+                    }
+
+                    .fc-widget-content {
+                        height: 50px;
+                    }
+
+                    .fc-axis {
+                        padding-left: 24px;
+                    }
+                }
+
+                .Socialevents{
+                        border: 1px solid #3a87ad;
+                        background-color: #3a87ad;
+                }
+                .Sports{
+                    border: 1px solid #9C27B0;
+                    background-color: #9C27B0;
+                }
+                .EntertainmentMusic{
+                    border: 1px solid #607D8B;
+                    background-color: #607D8B;
+                }
+                .Arts{
+                    border: 1px solid rgb(3,155,229);
+                    background-color: rgb(3,155,229);
+                }
+                .Religiousevents{
+                    border: 1px solid rgb(76, 175, 80);
+                    background-color: rgb(76, 175, 80);
+                }
+                .Fundraiser{
+                    border: 1px solid rgb(244,67,54);
+                    background-color: rgb(244,67,54);
+                }
+                .Cityevents{
+                    border: 1px solid #FF9800;
+                    background-color: #FF9800;
+                }
+                .Governmentevents{
+                    border: 1px solid rgb(255, 193, 7);
+                    background-color: rgb(255, 193, 7);
+                }
+                .Cultural{
+                    border: 1px solid rgb(205, 220, 57);
+                    background-color: rgb(205, 220, 57);
+                }
+                .Education{
+                    border: 1px solid rgb(158, 158, 158);
+                    background-color: rgb(158, 158, 158);
+                }
+                .Environmental{
+                    border: 1px solid rgb(121, 85, 72);
+                    background-color: rgb(121, 85, 72);
+                }
+            }
+        }
+    }
+}
+
+// RESPONSIVE
+@media screen and (max-width: $layout-breakpoint-xs) {
+
+    #calendar {
+
+        .header {
+            padding: 8px;
+
+            .header-content {
+
+                .header-top {
+
+                    .logo {
+                        margin-bottom: 16px;
+                    }
+                }
+            }
+
+            .add-event-button {
+                right: 10px;
+            }
+        }
+    }
+}

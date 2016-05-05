@@ -1,0 +1,33 @@
+<h1>
+     <div class="form-wrapper md-whiteframe-1dp" flex="100">
+
+
+                    <div class="form-title">Add banner images</div>
+
+                    <div layout="column" layout-gt-sm="row">
+                    <md-button type="submit" class="md-raised md-accent" aria-label="Submit" ng-click="addImage()" ng-disabled="uploadingFile">
+                        Add new
+                    </md-button>
+                    <input type="file" id="add_image" name="add_image" onchange="angular.element(this).scope().handleFileSelect(this)" style="display:none">
+                    </div>
+                    <md-progress-linear md-mode="indeterminate" ng-show="uploadingFile"></md-progress-linear>    
+                    <div layout="row" layout-wrap>
+                    <div style="width:50%; float:left" layout="column" ng-repeat="attachment in vm.attachments">
+                    <md-card >
+                        <img ng-src="{{attachment.filepath}}" class="md-card-image" alt="Washed Out">
+                        <md-card-title>
+                          <md-card-title-text>
+                            <span class="md-headline">{{attachment.name}}</span>
+                          </md-card-title-text>
+                        </md-card-title>
+                        
+                        <md-card-actions layout="row" layout-align="end center">
+                          <md-button ng-click="deleteFile(attachment.temp_id, attachment.filepath)" ng-disabled="uploadingFile || deletingFile">Remove</md-button>
+                        </md-card-actions>
+                    </md-card>
+                </div>
+                </div>
+
+
+            </div>
+</h1>

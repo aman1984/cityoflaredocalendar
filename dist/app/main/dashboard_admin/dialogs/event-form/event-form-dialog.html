@@ -1,0 +1,239 @@
+<md-dialog class="event-form-dialog compose-dialog" aria-label="New Message">
+    <form name="eventForm" class="md-inline-form" novalidate>
+        <md-toolbar class="md-accent md-hue-2">
+            <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                <span class="title">{{vm.dialogTitle}}</span>
+                <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog">
+                    <md-icon md-font-icon="icon-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content ms-scroll>
+            <md-input-container class="md-block">
+                <label>Title</label>
+                <input name="title" ng-model="vm.calendarEvent.title" required>
+                <div ng-messages="eventForm.title.$error" ng-show="eventForm.title.$touched" role="alert">
+                    <div ng-message="required">
+                        <span >Title field is required</span>
+                    </div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>Location</label>
+                <input name="location" ng-model="vm.calendarEvent.location" required>
+                <div ng-messages="eventForm.location.$error" ng-show="eventForm.location.$touched" role="alert">
+                    <div ng-message="required">
+                        <span>Location field is required</span>
+                    </div>
+                </div>
+            </md-input-container>
+
+            <div layout="row" class="date-row">
+                <label>Start date</label>
+                <!-- <md-datepicker ng-model="vm.calendarEvent.start" md-placeholder="Start Date"></md-datepicker> -->
+                <mdp-date-picker mdp-open-on-click ng-model="vm.calendarEvent.start" md-placeholder="Start Date" mdp-format="DD/MM/YYYY"></mdp-date-picker>
+                <md-input-container>
+                    <label>Hours</label>
+                    <md-select ng-model="vm.calendarEvent.start_time_hours">
+                      <md-option ng-repeat="hour in ::vm.hours" value="{{hour}}">
+                        {{hour}}
+                      </md-option>
+                    </md-select>
+                  </md-input-container>
+                   <md-input-container>
+                    <label>Minutes</label>
+                    <md-select ng-model="vm.calendarEvent.start_time_minutes">
+                      <md-option ng-repeat="minute in ::vm.minutes" value="{{minute}}">
+                        {{minute}}
+                      </md-option>
+                    </md-select>
+                  </md-input-container>
+            </div>
+
+            <div layout="row" class="date-row">
+                <label>End date</label>
+                <!-- <md-datepicker ng-model="vm.calendarEvent.end" md-placeholder="End Date"></md-datepicker> -->
+                <mdp-date-picker mdp-open-on-click ng-model="vm.calendarEvent.end" md-placeholder="End Date" mdp-format="DD/MM/YYYY"></mdp-date-picker>
+                 <md-input-container>
+                    <label>Hours</label>
+                    <md-select ng-model="vm.calendarEvent.end_time_hours">
+                      <md-option ng-repeat="hour in ::vm.hours" value="{{hour}}">
+                        {{hour}}
+                      </md-option>
+                    </md-select>
+                  </md-input-container>
+                   <md-input-container>
+                    <label>Minutes</label>
+                    <md-select ng-model="vm.calendarEvent.end_time_minutes">
+                      <md-option ng-repeat="minute in ::vm.minutes" value="{{minute}}">
+                        {{minute}}
+                      </md-option>
+                    </md-select>
+                  </md-input-container>
+            </div>
+    
+            <div layout="row" class="date-row">
+                <legend>Repeat</legend>
+                <md-radio-group ng-model="vm.calendarEvent.recurring">
+                  <md-radio-button value="no-repeat" class="md-primary" ng-checked="vm.calendarEvent.recurring=='no-repeat'">No-repeat</md-radio-button>
+                  <md-radio-button value="daily" class="md-primary" ng-checked="vm.calendarEvent.recurring=='daily'">Daily</md-radio-button>
+                  <md-radio-button value="weekly" class="md-primary" ng-checked="vm.calendarEvent.recurring=='weekly'">Weekly</md-radio-button>
+                  <md-radio-button value="monthly" class="md-primary" ng-checked="vm.calendarEvent.recurring=='monthly'">Monthly</md-radio-button>
+                </md-radio-group>
+            </div>
+            <!-- days of week -->
+            <div layout="row" layout-wrap ng-show="vm.calendarEvent.recurring=='weekly'">
+                <div flex="100" flex-gt-sm="100" layout="column">
+                  <div>
+                    <fieldset class="standard" >
+                      <legend>Select Days</legend>
+                      <div layout="row" layout-wrap flex>
+                        <div flex="50" ng-repeat="day in vm.days_of_week_value">
+                          <md-checkbox ng-checked="existsDays(day, selectedDays)" ng-click="toggleDays(day, selectedDays)">
+                            {{ vm.days_of_week[day] }}
+                          </md-checkbox>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+            <!-- end days of week -->
+            <!-- month recurring -->
+            <div layout="row" layout-wrap ng-show="vm.calendarEvent.recurring=='monthly'">
+                <div flex="100" flex-gt-sm="100" layout="column">
+                  <div>
+                    <fieldset class="standard" >
+                      <legend>Select Type</legend>
+                      <md-radio-group ng-model="vm.calendarEvent.month_recurring_type">
+                      <md-radio-button value="by_day" class="md-primary" ng-click="vm.calendarEvent.by_day_recurring= ''">By Day (of every month)</md-radio-button>
+                      <md-radio-button value="by_date" class="md-primary" ng-click="vm.calendarEvent.by_date_recurring = ''">By Date (of every month)</md-radio-button>
+                      </md-radio-group>
+                      <md-select ng-model="vm.calendarEvent.by_day_week" ng-show="vm.calendarEvent.month_recurring_type=='by_day'" >
+                          <md-option value="" selected>Select week</md-option>
+                          <md-option value="1">1st</md-option>
+                          <md-option value="2">2nd</md-option>
+                          <md-option value="3">3rd</md-option>
+                          <md-option value="4">4th</md-option>
+                          <md-option value="5">5th</md-option>
+                        </md-select>
+                      <md-radio-group ng-show="vm.calendarEvent.month_recurring_type=='by_day'" ng-model="vm.calendarEvent.by_day_recurring" >
+                      <div layout="row" layout-wrap flex>
+                        <div flex="50" ng-repeat="day in vm.days_of_week_value">
+                          <md-radio-button value="{{day}}" >
+                            {{ vm.days_of_week[day] }}
+                          </md-radio-button>
+                        </div>
+                      </div>
+                      </md-radio-group>
+                      <div layout="row" layout-wrap flex ng-show="vm.calendarEvent.month_recurring_type=='by_date'">
+                        <md-input-container>
+                        <label>Date</label>
+                        <md-select ng-model="vm.calendarEvent.by_date_recurring">
+                          <md-option ng-repeat="date in vm.dates" value="{{date}}">
+                            {{date}}
+                          </md-option>
+                        </md-select>
+                      </md-input-container>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+            <!-- end month recurring -->
+            <!-- CATEGORIES -->
+            <div layout="row" layout-wrap >
+                <div flex="100" flex-gt-sm="100" layout="column">
+                  <div>
+                    <fieldset class="standard" >
+                      <legend>Categories</legend>
+                      <div layout="row" layout-wrap flex>
+                        <div flex="50" ng-repeat="item in vm.categories">
+                          <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
+                            {{ item }}
+                          </md-checkbox>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+                <div flex="100">
+                  <h2 class="md-title">Selected Categories</h2>
+                  <code style="display: block; padding: 8px;">{{selected | json}}</code>
+                </div>
+              </div>
+            <!-- End categories -->
+            <md-input-container class="md-block">
+                <label>Contact Name</label>
+                <input name="contact_name" ng-model="vm.calendarEvent.contact_name" required>
+                <div ng-messages="eventForm.contact_name.$error" ng-show="eventForm.contact_name.$touched" role="alert"
+                         multiple>
+                        <div ng-message="required">
+                            <span >Contact name is required</span>
+                        </div>
+                    </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Contact number</label>
+                <input name="contact_number" ng-model="vm.calendarEvent.contact_number" required>
+                <div ng-messages="eventForm.contact_number.$error" ng-show="eventForm.contact_number.$touched" role="alert"
+                         multiple>
+                        <div ng-message="required">
+                            <span >Contact number is required</span>
+                        </div>
+                    </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Link</label>
+                <input name="link" ng-model="vm.calendarEvent.link" ng-pattern="/^http(s)?:\/\/(www\.)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/">
+                <div ng-messages="eventForm.link.$error" ng-show="eventForm.link.$touched" role="alert"
+                         multiple>
+                        <div ng-message="pattern">
+                            <span >Link must be a valid</span>
+                        </div>
+                    </div>
+            </md-input-container>
+            <md-input-container flex class="md-block textarea-container">
+                <label>Description</label>
+                <textarea ng-model="vm.calendarEvent.description" md-maxlength="250" required></textarea>
+            </md-input-container>
+
+            <div class="attachment-list">
+                <div class="attachment" layout="row" layout-align="space-between center" ng-repeat="attachment in vm.attachments">
+                    <div>
+                        <span class="filename">{{attachment.name}}</span>
+                        <span class="size">({{attachment.size}} Kb)</span>
+                        <md-button class="md-icon-button" aria-label="Delete attachment" href="{{attachment.filepath}}" download>
+                        <md-icon md-font-icon="icon-download" class="s16"></md-icon>
+                        <md-tooltip><span>Download attachment</span></md-tooltip>
+                    </md-button>
+                    <md-progress-linear md-mode="indeterminate" ng-show="attachment.uploading"></md-progress-linear>
+                    </div>
+                    <md-button class="md-icon-button" aria-label="Delete attachment" ng-click="deleteFile(attachment.temp_id, attachment.filepath)" ng-disabled="attachment.uploading">
+                        <md-icon md-font-icon="icon-close" class="s16"></md-icon>
+                        <md-tooltip><span>Delete attachment</span></md-tooltip>
+                    </md-button>
+                    
+                </div>
+            </div>
+
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row" layout-align="space-between center">
+        <div layout="row" layout-align="start center">
+            <md-button ng-click="vm.saveEvent()" class="save-button md-accent md-raised" aria-label="SAVE"
+                       ng-disabled="( eventForm.$invalid) || selected.length==0 || uploadingFile"
+                       >
+                SAVE
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Attach file" ng-click="attachFile()">
+                    <md-icon md-font-icon="icon-paperclip"></md-icon>
+                    <md-tooltip><span>Attach file</span></md-tooltip>
+            </md-button>
+            <input type="file" id="attach_file" name="attach_file" onchange="angular.element(this).scope().handleFileSelect(this)" style="display:none">
+            </div>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

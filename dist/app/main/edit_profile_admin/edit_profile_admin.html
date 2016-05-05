@@ -1,0 +1,53 @@
+<h1>
+     <div class="form-wrapper md-whiteframe-1dp" flex="60" flex-offset="20">
+
+                <form name="basicForm" ng-submit="editAdminProfile(basicForm.$valid)" class="md-inline-form" novalidate role="basicForm" xt-form="basicForm">
+
+                    <div class="form-title">Edit profile</div>
+                    <div layout="column" layout-gt-sm="row" layout-align="center center" style="margin-bottom:30px">
+                    <img class="profile-image avatar huge" ng-if="vm.basicForm.profile_pic==''" src="assets/images/avatars/profile.jpg"><br>
+                    <img class="profile-image avatar huge" ng-if="vm.basicForm.profile_pic!==''" ng-src="{{vm.basicForm.profile_pic}}"><br>
+                    </div>
+                    <div layout="column" layout-gt-sm="row" layout-align="center center" style="margin-bottom:30px">
+                    <md-button type="button" class="md-raised md-accent" aria-label="Submit" ng-click="addImage()" ng-disabled="uploadingFile">
+                        Change profile pic
+                    </md-button>
+                    </div>
+                    <input type="file" id="add_image" name="add_image" onchange="angular.element(this).scope().handleFileSelect(this)" style="display:none">
+                    <div layout="column" layout-gt-sm="row">
+                        <md-input-container flex>
+                            <input type="text" name="fullname" ng-model="vm.basicForm.fullname"
+                                   placeholder="Full name"
+                                   required>
+                            <div ng-messages="basicForm.fullname.$error" ng-show="basicForm.fullname.$touched"
+                                 role="alert">
+                                <div ng-message="required">
+                                    <span>Full name field is required.</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-container flex>
+                            <input type="text" name="email" ng-model="vm.basicForm.email" placeholder="Email"
+                                   ng-pattern="/^.+@.+\..+$/" required>
+                            <div ng-messages="basicForm.email.$error" ng-show="basicForm.email.$touched"
+                                 role="alert">
+                                <div ng-message="required">
+                                    <span>Email field is required.</span>
+                                </div>
+                                <div ng-message="pattern">
+	                            	<span>Email must be a valid e-mail address</span>
+	                        	</div>
+                            </div>
+                            
+                        </md-input-container>
+                    </div>
+
+                    <md-button type="submit" class="md-raised md-accent" aria-label="Save"
+                               ng-disabled="basicForm.$invalid || basicForm.$pristine">
+                        Save
+                    </md-button>
+                </form>
+
+            </div>
+</h1>

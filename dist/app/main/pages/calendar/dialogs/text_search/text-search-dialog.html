@@ -1,0 +1,37 @@
+<md-dialog class="event-detail-dialog" aria-label="New Message">
+    <md-toolbar class="md-accent md-hue-2">
+        <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+            <span class="title">Text Search</span>
+            <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog">
+                    <md-icon md-font-icon="icon-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content ms-scroll>
+        <form name="myForm">
+    <p>Type a keyword which you would like to search.</p>
+    <!-- CATEGORIES -->
+            <div layout="row" layout-wrap >
+                <div flex="100" flex-gt-sm="100" layout="column">
+                  <md-input-container class="md-block">
+                      <label>Keyword</label>
+                      <input name="keyword" ng-model="vm.keyword" required>
+                      <div ng-messages="myForm.keyword.$error" ng-show="myForm.keyword.$touched" role="alert">
+                          <div ng-message="required">
+                              <span >Title field is required</span>
+                          </div>
+                      </div>
+                  </md-input-container>
+                </div>
+              </div>
+            <!-- End categories -->
+    <div layout="row">
+      <!-- <md-button ng-click="clearValue()" ng-disabled="!myModel" style="margin-right: 20px;">Clear</md-button> -->
+      <md-button ng-click="save()" ng-disabled="myForm.$invalid || myForm.$pristine" class="md-accent md-raised" layout layout-align="center end">Search</md-button>
+    </div>
+  </form>
+        
+
+    </md-dialog-content>
+</md-dialog>

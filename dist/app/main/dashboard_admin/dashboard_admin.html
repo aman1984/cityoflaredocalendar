@@ -1,0 +1,169 @@
+<div id="simple-table" class="page-layout simple fullwidth doc-page element-doc-page">
+
+    <!-- CONTENT -->
+    <div class="content">
+        <md-button class="add-event-button md-fab md-warn" ng-click="addEvent($event)"
+                   aria-label="Add event">
+            <md-icon md-font-icon="icon-plus"></md-icon>
+        </md-button>
+        <div class="md-title">Pending/Modified Events</div>
+
+        <div class="white-bg md-whiteframe-4dp">
+            <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions">
+                <thead>
+                    <tr>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Action</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Name</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">title</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Start Date</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">End Date</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Status</span>
+                            </div>
+                        </th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="event in vm.eventData | filter:pendingFilter">
+                        <td>
+                            <md-button class="md-raised" ng-click="viewEvent($event, event)">View</md-button>
+                            <md-button class="md-raised md-primary" ng-click="approveEvent(event.event_id, event.status)">Approve</md-button> <md-button class="md-raised md-warn" ng-click="showConfirm($event, event.event_id, event.status)"><span ng-show="event.status=='pending'">Decline</span><span ng-show="event.status=='modified'">Delete</span></md-button>
+                        </td>
+                        <td>{{ event.name }} {{ event.last_name }}</td>
+                        <td>{{ event.title }}</td>
+                        <td>{{ event.start_date }}</td>
+                        <td>{{ event.end_date }}</td>
+                        <td>{{ event.status }}</td>
+
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="md-title" style="margin-top:20px">Approved Events</div>
+
+        <div class="white-bg md-whiteframe-4dp">
+            <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions">
+                <thead>
+                    <tr>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Action</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Name</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Title</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Start Date</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">End Date</span>
+                            </div>
+                        </th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="event in vm.eventData | filter:{status:'approved'}">
+                        <td>
+                            <md-button class="md-raised" ng-click="viewEvent($event, event)">View</md-button>
+                            <md-button class="md-raised md-primary" ng-click="editEvent($event, event.event_id)">Edit</md-button> <md-button class="md-raised md-warn" ng-click="showConfirmDeleteEvent($event, event.event_id)">Delete</md-button>
+                        </td>
+                        <td>{{ event.name }} {{ event.last_name }}</td>
+                        <td>{{ event.title }}</td>
+                        <td>{{ event.start_date }}</td>
+                        <td>{{ event.end_date }}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="md-title" style="margin-top:20px">Declined Events</div>
+
+        <div class="white-bg md-whiteframe-4dp">
+            <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions">
+                <thead>
+                    <tr>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Action</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Name</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Title</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Start Date</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">End Date</span>
+                            </div>
+                        </th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="event in vm.eventData | filter:{status:'declined'}">
+                        <td>
+                            <md-button class="md-raised" ng-click="viewEvent($event, event)">View</md-button>
+                            <md-button class="md-raised md-warn"  ng-click="showConfirmDeleteEvent($event, event.event_id)">Delete</md-button>
+                        </td>
+                        <td>{{ event.name }} {{ event.last_name }}</td>
+                        <td>{{ event.title }}</td>
+                        <td>{{ event.start_date }}</td>
+                        <td>{{ event.end_date }}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>

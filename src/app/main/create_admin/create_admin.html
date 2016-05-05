@@ -1,0 +1,81 @@
+<h1>
+     <div class="form-wrapper md-whiteframe-1dp" flex="60"  flex-offset="20">
+
+                <form name="basicForm" ng-submit="createAdmin(basicForm.$valid)" class="md-inline-form" novalidate>
+
+                    <div class="form-title">Create Sub-admin</div>
+
+                    <div layout="column" layout-gt-sm="row">
+                        <md-input-container flex>
+                            <input type="text" name="fullname" ng-model="vm.basicForm.fullname"
+                                   placeholder="Fullname"
+                                   required>
+                            <div ng-messages="basicForm.fullname.$error" ng-show="basicForm.fullname.$touched"
+                                 role="alert">
+                                <div ng-message="required">
+                                    <span>Fullname field is required.</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-container flex>
+                            <input type="text" name="email" ng-model="vm.basicForm.email" placeholder="Email"
+                                   ng-pattern="/^.+@.+\..+$/" required>
+                            <div ng-messages="basicForm.email.$error" ng-show="basicForm.email.$touched"
+                                 role="alert">
+                                <div ng-message="required">
+                                    <span>Email field is required.</span>
+                                </div>
+                                <div ng-message="pattern">
+	                            	<span>Email must be a valid e-mail address</span>
+	                        	</div>
+                            </div>
+                            
+                        </md-input-container>
+                    </div>
+
+                    <div layout="column" layout-gt-sm="row">
+                        <md-input-container flex>
+                            <input type="password" name="password" ng-model="vm.basicForm.password"
+                                   placeholder="Password"
+                                   required validate-must-equal-to="confirm_password" complex-password>
+                            <div ng-messages="basicForm.password.$error" ng-show="basicForm.password.$touched"
+                                 role="alert">
+                                <div ng-message="required">
+                                    <span>Password field is required.</span>
+                                </div>
+                                <div ng-message="complexity">
+                                    <span >Minimum 8 characters, 1 uppercase, 1 lowecase, 1 numeric and 1 special character required</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-container flex>
+                            <input type="password" name="confirm_password" ng-model="vm.basicForm.confirm_password" placeholder="Confirm password"
+                                   required compare-to="vm.basicForm.password" complex-password>
+                            <div ng-messages="basicForm.confirm_password.$error" ng-show="basicForm.confirm_password.$touched"
+                                 role="alert">
+                                <div ng-message="required">
+                                    <span>Confirm password field is required.</span>
+                                </div>
+                                <div ng-message="compareTo">
+                                    <span >Password (Confirm) must match</span>
+                                </div>
+                                <div ng-message="complexity">
+                                    <span >Minimum 8 characters, 1 uppercase, 1 lowecase, 1 numeric and 1 special character required</span>
+                                </div>
+
+                            </div>
+                        </md-input-container>
+                    </div>
+
+
+
+                    <md-button type="submit" class="md-raised md-accent" aria-label="Submit"
+                               ng-disabled="basicForm.$invalid || basicForm.$pristine">
+                        Submit
+                    </md-button>
+                </form>
+
+            </div>
+</h1>

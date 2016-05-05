@@ -1,0 +1,82 @@
+<div id="simple-table" class="page-layout simple fullwidth doc-page element-doc-page">
+
+    <!-- CONTENT -->
+    <div class="content">
+        <div class="md-title">User list</div>
+
+        <div class="white-bg md-whiteframe-4dp">
+            <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions">
+                <thead>
+                    <tr>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Action</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">User id</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Name</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Email</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Organization</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Title</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Phone number</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Status</span>
+                            </div>
+                        </th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in vm.userData">
+                        <td>
+                            <md-button class="md-raised md-primary" ng-show="user.account_status!='active'" ng-click="activateUser(user.user_id, user.email)">Activate</md-button>
+                            <md-button class="md-raised md-primary" ng-show="user.account_status=='active'" ng-click="deactivateUser(user.user_id, user.email)">Deactivate</md-button>
+                            <md-button class="md-raised" ng-click="editUser($event, user.user_id)">Edit</md-button>
+                            <md-button class="md-raised" ng-click="changePassword($event, user.user_id)">Change password</md-button>
+                            <md-button class="md-raised md-warn" ng-click="showConfirm($event, user.user_id, user.email)">Delete</md-button>
+                            <md-button class="md-raised" ng-click="addEvent($event, user.user_id)">Create event</md-button>
+                        </td>
+                        <td>{{ user.user_id }}</td>
+                        <td>{{ user.name }} {{ user.last_name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.organization }}</td>
+                        <td>{{ user.title }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td>{{ user.account_status }}</td>
+                        
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>

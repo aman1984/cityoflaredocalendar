@@ -1,0 +1,44 @@
+<md-dialog class="event-detail-dialog" aria-label="New Message">
+    <md-toolbar class="md-accent md-hue-2">
+        <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+            <span class="title">Search</span>
+            <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog">
+                    <md-icon md-font-icon="icon-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content ms-scroll>
+        <form name="myForm">
+    <p>Select a category for which you would like to search events.</p>
+    <!-- CATEGORIES -->
+            <div layout="row" layout-wrap >
+                <div flex="100" flex-gt-sm="100" layout="column">
+                  <div>
+                    <fieldset class="standard" >
+                      <legend>Categories</legend>
+                      <div layout="row" layout-wrap flex>
+                        <div flex="50" ng-repeat="item in vm.categories" class="{{splitItem(item)}}">
+                          <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
+                            {{ item }}
+                          </md-checkbox>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+                <div flex="100">
+                  <h2 class="md-title">Selected Categories</h2>
+                  <code style="display: block; padding: 8px;">{{selected | json}}</code>
+                </div>
+              </div>
+            <!-- End categories -->
+    <div layout="row">
+      <!-- <md-button ng-click="clearValue()" ng-disabled="!myModel" style="margin-right: 20px;">Clear</md-button> -->
+      <md-button ng-click="save()" ng-disabled="selected.length==0" class="md-primary" layout layout-align="center end">Search</md-button>
+    </div>
+  </form>
+        
+
+    </md-dialog-content>
+</md-dialog>
